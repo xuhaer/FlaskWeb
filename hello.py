@@ -11,11 +11,21 @@ from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
 from flask_migrate import Migrate, MigrateCommand
+import os
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'haha'
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:123321@localhost:3306/flasky?charset=utf8' 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True #设置这一项是每次请求结束后都会自动提交数据库中的变动
+app.config['MAIL_SERVER'] = 'smtp.163.com'
+app.config['MAIL_PORT'] = 25
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['FLASKY_MAIL_SUBJECT_PREFIX'] = '[Flasky]'
+app.config['FLASKY_MAIL_SENDER'] = 'Flasky Admin <flasky@example.com>'
+app.config['FLASKY_ADMIN'] = os.environ.get('FLASKY_ADMIN')
 
 
 bootstrap = Bootstrap(app)
@@ -27,6 +37,8 @@ manager.add_command('db', MigrateCommand)
 # 创建迁移仓库python hello.py db init
 # 创建迁移脚本python hello.py db migrate -m "initial migration"
 # 把迁移应用到数据库python hello.py db upgrade
+mail = Mail(app)
+
 
 '''定义模型，建立关系'''
 class Role(db.Model):
