@@ -1,1 +1,0 @@
-There is New User {{ user.username }} joined.
