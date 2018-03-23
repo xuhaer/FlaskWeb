@@ -4,4 +4,4 @@
 使用：先手动创建flasky_dev数据库，然后创建数据表： $ python manage.py shell, 然后再 db.create_all()
 运行blog ： $ python manage.py runserver
 
-![效果图](https://github.com/xuhaer/FlaskWeb/blob/master/app/static/fig.png）
+![效果图](https://github.com/xuhaer/FlaskWeb/blob/master/app/static/fig.png)
