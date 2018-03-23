@@ -3,4 +3,4 @@
 功能对应书本中的前十四章，有用户认证、邮件通知、发表文章、管理评论、关注用户等功能。
 使用：先手动创建flasky_dev数据库，然后创建数据表： $ python manage.py shell, 然后再 db.create_all()
 运行blog ： $ python manage.py runserver
-![image](https://github.com/xuhaer/FlaskWeb/raw/master/fig.png)
+https://github.com/xuhaer/FlaskWeb/raw/master/fig.png
