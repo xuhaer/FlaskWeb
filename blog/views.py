@@ -13,7 +13,7 @@ def index(request):
 def detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     article.increase_views()
-    article.body = markdown.markdown(article.content,
+    article.content = markdown.markdown(article.content,
                                   extensions=[
                                       'markdown.extensions.extra',
                                       'markdown.extensions.codehilite',

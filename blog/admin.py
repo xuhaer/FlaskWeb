@@ -1,11 +1,21 @@
 from django.contrib import admin
-
-# Register your models here.
-
 from .models import Article, Category, Tag
+from pagedown.widgets import AdminPagedownWidget
+from django import forms
+
+
+class ArticleForm(forms.ModelForm):
+    content = forms.CharField(widget=AdminPagedownWidget())
+
+    class Meta:
+        model = Article
+        fields = '__all__'
+
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['title', 'created_at', 'modified_at', 'category', 'author']
+    form = ArticleForm
+
 
 
 admin.site.register(Article, ArticleAdmin)
