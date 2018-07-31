@@ -3,16 +3,13 @@ from markdown.extensions.toc import TocExtension
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.utils.text import slugify
-#from markdown.extensions.headerid import slugify
+from django.db.models import Q
 
 from .models import Article, Category, Tag
 from comments.forms import CommentForm
 
 
 # Create your views here.
-# def index(request):
-#     article_list = Article.objects.all().order_by('-created_at')
-#     return render(request, 'blog/index.html', context={'article_list': article_list})
 
 class IndexView(ListView):
     model = Article
@@ -95,24 +92,6 @@ class IndexView(ListView):
 
         return data
 
-# def detail(request, pk):
-#     article = get_object_or_404(Article, pk=pk)
-#     article.increase_views()
-#     article.content = markdown.markdown(article.content,
-#                                   extensions=[
-#                                       'markdown.extensions.extra',
-#                                       'markdown.extensions.codehilite',
-#                                       'markdown.extensions.toc',
-#                                   ])
-#     form = CommentForm()
-#     comment_list = article.comment_set.all()
-
-#     # 将文章、表单、以及文章下的评论列表作为模板变量传给 detail.html 模板，以便渲染相应数据。
-#     context = {'article': article,
-#                'form': form,
-#                'comment_list': comment_list
-#                }
-#     return render(request, 'blog/detail.html', context=context)
 
 class ArticleDetailView(DetailView):
     # 这些属性的含义和 ListView 是一样的
@@ -134,12 +113,6 @@ class ArticleDetailView(DetailView):
     def get_object(self, queryset=None):
         # 覆写 get_object 方法的目的是因为需要对 article 的 content 值进行渲染
         article = super(ArticleDetailView, self).get_object(queryset=None)
-        # article.content = markdown.markdown(article.content,
-        #                               extensions=[
-        #                                   'markdown.extensions.extra',
-        #                                   'markdown.extensions.codehilite',
-        #                                   'markdown.extensions.toc',
-        #                               ])
         md = markdown.Markdown(extensions=[
             'markdown.extensions.extra',
             'markdown.extensions.codehilite',
@@ -162,10 +135,6 @@ class ArticleDetailView(DetailView):
         return context
 
 
-# def archives(request, year, month):
-#     article_list = Article.objects.filter(created_at__year=year, created_at__month=month).order_by('-created_at')
-#     return render(request, 'blog/index.html', context={'article_list': article_list})
-
 class ArchivesView(ListView):
     model = Article
     template_name = 'blog/index.html'
@@ -175,12 +144,10 @@ class ArchivesView(ListView):
         year = self.kwargs.get('year')
         month = self.kwargs.get('month')
         return super(ArchivesView, self).get_queryset().filter(created_at__year=year,created_at__month=month)
-
-
-# def category(request, pk):
-#     cate = get_object_or_404(Category, pk=pk)
-#     article_list = Article.objects.filter(category=cate).order_by('-created_at')
+# def archives(request, year, month):
+#     article_list = Article.objects.filter(created_at__year=year, created_at__month=month).order_by('-created_at')
 #     return render(request, 'blog/index.html', context={'article_list': article_list})
+
 
 class CategoryView(ListView):
     model = Article
@@ -200,3 +167,20 @@ class TagView(ListView):
     def get_queryset(self):
         tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
         return super(TagView, self).get_queryset().filter(tags=tag)
+
+# def archives(request, year, month):
+#     article_list = Article.objects.filter(created_at__year=year, created_at__month=month).order_by('-created_at')
+#     return render(request, 'blog/index.html', context={'article_list': article_list})
+
+
+def search(request):
+    q = request.GET.get('q')
+    error_msg = ''
+
+    if not q:
+        error_msg = "请输入关键词"
+        return render(request, 'blog/index.html', {'error_msg': error_msg})
+
+    article_list = Article.objects.filter(Q(title__icontains=q) | Q(content__icontains=q))
+    return render(request, 'blog/index.html', {'error_msg': error_msg,
+                                               'article_list': article_list})
