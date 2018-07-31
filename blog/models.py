@@ -13,11 +13,13 @@ class Category(models.Model):
     def __repr__(self):
         return 'Category:{}'.format(self.name)
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=20)
 
     def __repr__(self):
         return 'Tag:{}'.format(self.name)
+
 
 class Article(models.Model):
     class Meta:

@@ -17,8 +17,17 @@
         </header>
         <div class="entry-content clearfix">
             {{ article.content|safe }}
+            <div class="widget-tag-cloud">
+                <ul>
+                    标签：
+                    {% for tag in article.tags.all %}
+                        <li><a href="{% url 'blog:tag' tag.pk %}"># {{ tag.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </article>
+
     <section class="comment-area" id="comment-area">
         <hr>
         <h3>发表评论</h3>

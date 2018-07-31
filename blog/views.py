@@ -1,9 +1,10 @@
 import markdown
-from .models import Article, Category
-from comments.forms import CommentForm
-
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
+
+from .models import Article, Category, Tag
+from comments.forms import CommentForm
+
 
 # Create your views here.
 # def index(request):
@@ -27,7 +28,6 @@ class IndexView(ListView):
         paginator = context.get('paginator')
         page = context.get('page_obj')
         is_paginated = context.get('is_paginated')
-        print('paginator, page, is_paginatedpaginator, page, is_paginated',paginator, page, is_paginated)
         # 调用自己写的 pagination_data 方法获得显示分页导航条需要的数据，见下方。
         pagination_data = self.pagination_data(paginator, page, is_paginated)
         context.update(pagination_data)
@@ -50,7 +50,6 @@ class IndexView(ListView):
         page_range = paginator.page_range
 
         if page_number == 1:
-            print('fail')
 
             # 比如page_range是 [1, 2, 3, 4]，那么获取的就是 right = [2, 3]。
             right = page_range[page_number:page_number + 2]
@@ -181,3 +180,13 @@ class CategoryView(ListView):
     def get_queryset(self):
         category = get_object_or_404(Category, pk=self.kwargs.get('pk'))
         return super(CategoryView, self).get_queryset().filter(category=category)
+
+
+class TagView(ListView):
+    model = Article
+    template_name = 'blog/index.html'
+    context_object_name = 'article_list'
+
+    def get_queryset(self):
+        tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
+        return super(TagView, self).get_queryset().filter(tags=tag)

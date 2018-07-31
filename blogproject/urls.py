@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from blog.feeds import ArticlesRssFeed
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('', include('comments.urls')),
-    
+    path('rss/',ArticlesRssFeed(),name='rss')
 ]

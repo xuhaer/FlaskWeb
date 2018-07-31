@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Article, Category, Tag
-from pagedown.widgets import AdminPagedownWidget
 from django import forms
+from pagedown.widgets import AdminPagedownWidget
+
+from .models import Article, Category, Tag
 
 
 class ArticleForm(forms.ModelForm):
