@@ -14,7 +14,84 @@ class IndexView(ListView):
     model = Article
     template_name = 'blog/index.html'
     context_object_name = 'article_list'
+    paginate_by = 1
 
+    def get_context_data(self, **kwargs): 
+        # 覆写 get_context_data 的目的是因为除了将 article 传递给模板外（DetailView 已经帮我们完成），
+        # 还要把评论表单、article 下的评论列表传递给模板。
+        context = super().get_context_data(**kwargs)
+        # 父类生成的字典中已有 paginator、page_obj、is_paginated 这三个模板变量
+        # paginator 是 Paginator 的一个实例，
+        # page_obj 是 Page 的一个实例，
+        # is_paginated 是一个布尔变量，用于指示是否已分页。
+        paginator = context.get('paginator')
+        page = context.get('page_obj')
+        is_paginated = context.get('is_paginated')
+        print('paginator, page, is_paginatedpaginator, page, is_paginated',paginator, page, is_paginated)
+        # 调用自己写的 pagination_data 方法获得显示分页导航条需要的数据，见下方。
+        pagination_data = self.pagination_data(paginator, page, is_paginated)
+        context.update(pagination_data)
+        return context
+
+    def pagination_data(self, paginator, page, is_paginated):
+        if not is_paginated:
+            return {}
+
+        left = []
+        right = []
+        left_has_more = False 
+        right_has_more = False
+        first = False
+        last = False
+        page_number = page.number # 用户请求的是第几页
+        total_pages = paginator.num_pages
+
+        # 获得整个分页页码列表，比如分了四页，那么就是 [1, 2, 3, 4]
+        page_range = paginator.page_range
+
+        if page_number == 1:
+            print('fail')
+
+            # 比如page_range是 [1, 2, 3, 4]，那么获取的就是 right = [2, 3]。
+            right = page_range[page_number:page_number + 2]
+            # 是否需要显示最后一页和最后一页前的省略号
+            if right[-1] < total_pages - 1:
+                right_has_more = True
+            if right[-1] < total_pages:
+                last = True
+
+        elif page_number == total_pages:
+            # 比如page_range是 [1, 2, 3, 4]，那么获取的就是 left = [2, 3]
+            left = page_range[(page_number - 3) if (page_number - 3) > 0 else 0:page_number - 1]
+            # 是否需要显示第 1 页和第 1 页后的省略号
+            if left[0] > 2:
+                left_has_more = True
+            if left[0] > 1:
+                first = True
+        else:
+            left = page_range[(page_number - 3) if (page_number - 3) > 0 else 0:page_number - 1]
+            right = page_range[page_number:page_number + 2]
+
+            if right[-1] < total_pages - 1:
+                right_has_more = True
+            if right[-1] < total_pages:
+                last = True
+
+            if left[0] > 2:
+                left_has_more = True
+            if left[0] > 1:
+                first = True
+
+        data = {
+            'left': left,
+            'right': right,
+            'left_has_more': left_has_more,
+            'right_has_more': right_has_more,
+            'first': first,
+            'last': last,
+        }
+
+        return data
 
 # def detail(request, pk):
 #     article = get_object_or_404(Article, pk=pk)
@@ -63,7 +140,7 @@ class ArticleDetailView(DetailView):
                                       ])
         return article
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs): 
         # 覆写 get_context_data 的目的是因为除了将 article 传递给模板外（DetailView 已经帮我们完成），
         # 还要把评论表单、article 下的评论列表传递给模板。
         context = super(ArticleDetailView, self).get_context_data(**kwargs)

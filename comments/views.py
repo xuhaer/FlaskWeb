@@ -1,10 +1,11 @@
 
 # Create your views here.
-from django.shortcuts import render, get_object_or_404, redirect
-from blog.models import Article
-
 from .models import Comment
 from .forms import CommentForm
+from blog.models import Article
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic.base import RedirectView
 
 
 def article_comment(request, article_pk):
