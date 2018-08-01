@@ -15,7 +15,7 @@ class IndexView(ListView):
     model = Article
     template_name = 'blog/index.html'
     context_object_name = 'article_list'
-    paginate_by = 1
+    paginate_by = 5
 
     def get_context_data(self, **kwargs): 
         # 覆写 get_context_data 的目的是因为除了将 article 传递给模板外（DetailView 已经帮我们完成），

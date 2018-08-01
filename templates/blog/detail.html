@@ -53,7 +53,7 @@
                     <label for="{{ form.text.id_for_label }}">评论：</label>
                     {{ form.text }}
                     {{ form.text.errors }}
-                    <button type="submit" class="comment-btn">发表</button>
+                    <button type="submit" class="btn btn-primary">发表</button>
                 </div>
             </div>    <!-- row -->
         </form>
@@ -63,7 +63,7 @@
                 {% for comment in comment_list %}
                     <li class="comment-item">
                         <span class="nickname">{{ comment.name }}</span>
-                        <time class="submit-date">{{ comment.created_time }}</time>
+                        <time class="submit-date">{{ comment.created_at }}</time>
                         <div class="text">
                             {{ comment.text }}
                         </div>

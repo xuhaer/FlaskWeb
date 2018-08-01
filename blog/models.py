@@ -42,16 +42,18 @@ class Article(models.Model):
        # 调用父类的 save 方法将数据保存到数据库中
        super(Article, self).save(*args, **kwargs)
        
-    title = models.CharField(max_length=70)
+    title = models.CharField(max_length=64)
     content = models.TextField()
     created_at = models.DateTimeField()
-    modified_at = models.DateTimeField()
+    modified_at = models.DateTimeField(auto_now=True)
     # 但默认情况下 CharField 要求我们必须存入数据,否则就会报错。
     # 指定 blank=True 后就可以允许空值了。
-    digest = models.CharField(max_length=200, blank=True)
+    digest = models.CharField(max_length=200, blank=True,help_text="可选项，若为空则摘要取正文前32个字符")
     views = models.PositiveIntegerField(default=0)
+    likes = models.PositiveIntegerField(default=0)
+    is_top = models.BooleanField(default=False)
 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
     tags = models.ManyToManyField(Tag, blank=True) #可以无标签
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     def __repr__(self):
