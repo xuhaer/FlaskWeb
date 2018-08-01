@@ -450,6 +450,33 @@ img {
     color: #444;
 }
 
+#back-to-top{ 
+	display:block;  
+	width:60px; 
+	height:60px;
+	position:fixed;  
+	bottom:50px;  
+	right:40px; 
+	border-radius:10px 10px 10px 10px;   
+	text-decoration:none;  
+	display:none;  
+	background-color:#999999;     
+}
+
+#back-to-top span{ 
+	display:block; 
+	width:60px; 
+	color:#ffffff; 
+} 
+#back-to-top span:hover{ 
+	color:#cccccc; 
+} 
+#back-to-top span{ 
+	font-size:40px; 
+	text-align:center; 
+	margin-top:4px; 
+}
+
 /**
  * 6.0 - Footer
  */
