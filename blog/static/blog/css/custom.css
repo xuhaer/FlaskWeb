@@ -1,7 +1,7 @@
 /**
  * Table of Contents
  *
- * 1.0 - Google Font
+ 
  * 2.0 - General Elements
  * 3.0 - Site Header
  *   3.1 - Logo
@@ -14,19 +14,19 @@
  * 7.0 - Header Search Bar
  * 8.0 - Mobile Menu
  * 9.0 - Contact Page Social
- * 10.0 - Contact Form
  * 11.0 - Media Query
  * 12.0 - Comment
  * 13.0 - Pagination
  */
 
-/**
- * 1.0 - Google Font
- */
 
 /**
  * 2.0 - General Elements
  */
+
+::-moz-selection{background:#C9F0DD;} 
+::selection {background:#C9F0DD;} 
+
 
 * {
     outline: none;
@@ -54,9 +54,7 @@ a:hover, a:focus {
     color: #000;
 }
 
-::selection {
-    background-color: #eee;
-}
+
 
 body {
     color: #444;
@@ -99,6 +97,20 @@ img {
     margin-bottom: 40px;
 }
 
+
+.article-title-link {
+    /* display: block; */
+    margin-bottom: 25px;
+    margin-left: 25px;
+    color: #42b983;
+    word-break: break-all;
+    font-size: 1rem;
+}
+/* .col-md-12 {
+    margin-left:20%; 
+} */
+
+
 /**
  * 3.0 - Site Header
  */
@@ -140,17 +152,35 @@ img {
 /**
  * 3.2 - Main Navigation
  */
+ 
+ /* 导航条居中 */
+ .navbar-nav {
+    float: none;
+    text-align:center;
+  }
+  ul.nav.navbar-nav  li {
+      float:none;
+      display: inline-block;
+      margin: 0em;
+  }
+
 
 .main-nav {
     margin-top: 11px;
-    max-width: 95%;
+    max-width: 100%;
 }
 
-.main-nav a {
+/* .main-nav a {
     color: #000000 !important;
     padding: 0 0 5px 0 !important;
     margin-right: 30px;
     font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 24px;
+} */
+
+
+.main-nav a {
     font-weight: 300;
     font-size: 24px;
 }
@@ -180,19 +210,19 @@ img {
 
 .cl-effect-11 a {
     padding: 10px 0;
-    color: #0972b4;
+    /* color: #0972b4; */
     text-shadow: none;
 }
 
 .cl-effect-11 a::before {
     position: absolute;
-    top: 0;
-    left: 0;
+    /* top: 0;
+    left: 0; */
     overflow: hidden;
     padding: 0 0 5px 0 !important;
     max-width: 0;
     border-bottom: 1px solid #000;
-    color: #000;
+    color: #010;
     content: attr(data-hover);
     white-space: nowrap;
     -webkit-transition: max-width 0.5s;
@@ -211,17 +241,19 @@ img {
 
 .content-body {
     padding-bottom: 4em;
+    margin-left:15%;
+    margin-right:15%;
+
 }
 
 .article {
     background: #fff;
-    padding: 30px 30px 0;
 }
 
 .entry-title {
     text-align: center;
-    font-size: 1.9em;
-    margin-bottom: 20px;
+    font-size: 1.4em;
+    margin-bottom: 10px;
     line-height: 1.6;
     padding: 10px 20px 0;
 }
@@ -240,13 +272,30 @@ img {
     color: #000;
 }
 
-.article-category::after,
+.article-date {
+    color: #7f8c8d;
+    margin: 1.2em 0;
+}
+
+.article-date-archive {
+    color: #7f8c8d;
+    margin: 1.2em 0;
+    margin-left: 20%
+}
+}
+
+.article-author {
+    color: #CCFFFF;
+    margin: 1.2em 0;
+}
+
+/*.article-category::after,
 .article-date::after,
 .article-author::after,
 .comments-link::after {
-    content: ' ·';
-    color: #000;
-}
+    content: '  ';
+    color: #C0C0C0;
+}*/
 
 /**
  * 4.1 - Read More Button CSS 3 style
@@ -348,29 +397,6 @@ img {
     font-weight: 400;
 }
 
-.widget-recent-articles ul {
-    padding: 0;
-    margin: 0;
-    padding-left: 20px;
-}
-
-.widget-recent-articles ul li {
-    list-style-type: none;
-    position: relative;
-    line-height: 170%;
-    margin-bottom: 10px;
-}
-
-.widget-recent-articles ul li::before {
-    content: '\f3d3';
-    font-family: "Ionicons";
-    position: absolute;
-    left: -17px;
-    top: 3px;
-    font-size: 16px;
-    color: #000;
-}
-
 .widget-archives ul {
     padding: 0;
     margin: 0;
@@ -394,44 +420,7 @@ img {
     color: #000;
 }
 
-.widget-category ul {
-    padding: 0;
-    margin: 0;
-    padding-left: 25px;
-}
 
-.widget-category ul li {
-    list-style-type: none;
-    position: relative;
-    line-height: 170%;
-    margin-bottom: 10px;
-}
-
-.widget-category ul li::before {
-    content: '\f3fe';
-    font-family: "Ionicons";
-    position: absolute;
-    left: -25px;
-    top: 1px;
-    font-size: 18px;
-    color: #000;
-}
-
-.widget-tag-cloud ul {
-    padding: 0;
-    margin: 0;
-    margin-right: -10px;
-}
-
-.widget-tag-cloud ul li {
-    list-style-type: none;
-    font-size: 13px;
-    display: inline-block;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    padding: 3px 8px;
-    border: 1px solid #ddd;
-}
 
 .widget-content ul ul {
     margin-top: 10px;
@@ -441,14 +430,14 @@ img {
     margin-bottom: 10px;
 }
 
-.rss {
+/* .rss {
     font-size: 21px;
     margin-top: 30px;
 }
 
 .rss a {
     color: #444;
-}
+} */
 
 #back-to-top{ 
 	display:block;  
@@ -497,63 +486,30 @@ img {
 /**
  * 7.0 - Header Search Bar
  */
+ /* <div id="search-form" class="search-form">
+ <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+     <input type="search" name='q' placeholder="搜索" required>
+     <button type="submit"><span class="ion-ios-search-strong"></span></button>
+ </form>
+</div> */
 
-#header-search-box {
-    position: absolute;
-    right: 38px;
-    top: 8px;
-}
-
-.search-form {
-    display: none;
-    width: 25%;
-    position: absolute;
-    min-width: 200px;
-    right: -6px;
-    top: 33px;
-}
-
-#search-menu span {
-    font-size: 20px;
-}
-
-#searchform {
-    position: relative;
-    border: 1px solid #ddd;
-    min-height: 42px;
-}
-
-#searchform input[type=search] {
-    width: 100%;
-    border: none;
-    position: absolute;
-    left: 0;
-    padding: 10px 30px 10px 10px;
-    z-index: 99;
-}
-
-#searchform button {
-    position: absolute;
-    right: 6px;
-    top: 4px;
-    z-index: 999;
-    background: transparent;
+ .search-form {
     border: 0;
-    padding: 0;
-}
+    padding: .5em 1em .5em 2em;
+    width: 33%;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    background: #F2F2F2;
+    border-radius: 1.0em;
+    margin: 0;
+    font-size: 24px;
+    margin-left: 33%;
+ }
 
-#searchform button span {
-    font-size: 22px;
-}
 
-#search-menu span.ion-ios-close-empty {
-    font-size: 40px;
-    line-height: 0;
-    position: relative;
-    top: -6px;
-}
 
-/**
+
+ /**
  * 8.0 - Mobile Menu
  */
 
@@ -704,101 +660,6 @@ img {
     padding: 12px 20px;
 }
 
-/**
- * 10.0 - Contact Form
- */
-
-.contact-form input, .comment-form input {
-    border: 1px solid #aaa;
-    margin-bottom: 15px;
-    width: 100%;
-    padding: 15px 15px;
-    font-size: 16px;
-    line-height: 100%;
-    transition: 0.4s border-color linear;
-}
-
-.contact-form textarea, .comment-form textarea {
-    border: 1px solid #aaa;
-    margin-bottom: 15px;
-    width: 100%;
-    padding: 15px 15px;
-    font-size: 16px;
-    line-height: 20px !important;
-    min-height: 183px;
-    transition: 0.4s border-color linear;
-}
-
-.contact-form input:focus, .comment-form input:focus,
-.contact-form textarea:focus, .comment-form textarea:focus {
-    border-color: #666;
-}
-
-.btn-send {
-    background: none;
-    border: 1px solid #aaa;
-    cursor: pointer;
-    padding: 25px 80px;
-    display: inline-block;
-    letter-spacing: 1px;
-    position: relative;
-    transition: all 0.3s;
-}
-
-.btn-5 {
-    color: #666;
-    height: 70px;
-    min-width: 260px;
-    line-height: 15px;
-    font-size: 16px;
-    overflow: hidden;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-
-.btn-5 span {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    -webkit-transition: all 0.3s;
-    -webkit-backface-visibility: hidden;
-    -moz-transition: all 0.3s;
-    -moz-backface-visibility: hidden;
-    transition: all 0.3s;
-    backface-visibility: hidden;
-}
-
-.btn-5:before {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    line-height: 2.5;
-    font-size: 180%;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-}
-
-.btn-5:active:before {
-    color: #703b87;
-}
-
-.btn-5b:hover span {
-    -webkit-transform: translateX(200%);
-    -moz-transform: translateX(200%);
-    -ms-transform: translateX(200%);
-    transform: translateX(200%);
-}
-
-.btn-5b:before {
-    left: -100%;
-    top: 0;
-}
-
-.btn-5b:hover:before {
-    left: 0;
-}
 
 /**
  * 11.0 - Media Query
@@ -905,6 +766,7 @@ img {
 }
 
 .comment-item .text {
+    
     padding-top: 5px;
     font-size: 16px;
 }

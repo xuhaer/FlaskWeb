@@ -15,19 +15,19 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '请输入昵称',
+                'placeholder': '昵称',
             }),
             'email': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'example@gmail.com',
+                'placeholder': 'email',
             }),
             'url': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'https://example.com',
+                'placeholder': 'http:(可选)',
+                'required':False
             }),
             'text': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': '我有话说',
                 'rows': 4,
             }),
         }

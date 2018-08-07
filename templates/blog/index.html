@@ -12,21 +12,20 @@
                     <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
                 </h1>
                 <div class="entry-meta">
-                    <span class="article-category">
-                        <a href="{% url 'blog:category' article.category.pk %}">{{ article.category.name }}</a></span>
-                    <span class="article-date"><a href="#"><time class="entry-date"
-                                                              datetime="{{ article.created_at }}">{{ article.created_at }}</time></a></span>
-                    <span class="article-author"><a href="#">{{ article.author }}</a></span>
-                    <span class="comments-link">
+                    <span class="article-date" href="#"><time class="entry-date"
+                                                              datetime="{{ article.created_at|date:'M d,Y' }}">{{ article.created_at|date:'M d,Y' }}</time></span>
+                    <!-- <span class="comments-link">
                         <a href="{{ article.get_absolute_url }}#comment-area">{{ article.comment_set.count }} 评论</a></span>
-                    <span class="views-count"><a href="{{ article.get_absolute_url }}">{{ article.views }} 阅读</a></span>
+                    <span class="views-count"><a href="{{ article.get_absolute_url }}">{{ article.views }} 阅读</a></span> -->
                 </div>
             </header>
             <div class="entry-content clearfix">
-                <p>{{ article.digest }}...</p>
-                <div class="read-more cl-effect-14">
-                    <a href="{{ article.get_absolute_url }}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
-                </div>
+                <a href="{{ article.get_absolute_url }}" class="more-link"><p>{{ article.digest }}...</p></a>
+                </br>
+                <hr/>
+                <!-- <p>{{ article.digest }}...</p> -->
+                <!-- <div class="read-more cl-effect-14"> -->
+
             </div>
         </article>
     {% empty %}
@@ -34,37 +33,19 @@
     {% endfor %}
          
     
-    {% comment %}
-    完善的分页导航
-    {% endcomment %}
     {% if is_paginated %}
-        <div class="pagination">
-            <ul>
-                {% if first %}
-                    <li><a href="?page=1">1</a></li>
+        <nav aria-label="pagination">
+            <ul class="pager">
+                {% if page_obj.has_previous %}
+                    <li class="previous"><a href="?page={{ page_obj.previous_page_number }}"><span aria-hidden="true">&larr;</span> Older</a></li>
                 {% endif %}
-                {% if left %}
-                    {% if left_has_more %}
-                        <li><span>...</span></li>
-                    {% endif %}
-                    {% for i in left %}
-                        <li><a href="?page={{ i }}">{{ i }}</a></li>
-                    {% endfor %}
-                {% endif %}
-                <li class="current"><a href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
-                {% if right %}
-                    {% for i in right %}
-                        <li><a href="?page={{ i }}">{{ i }}</a></li>
-                    {% endfor %}
-                    {% if right_has_more %}
-                        <li><span>...</span></li>
-                    {% endif %}
-                {% endif %}
-                {% if last %}
-                    <li><a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
+                {% if page_obj.has_next %}
+                    <li class="next"><a href="?page={{ page_obj.next_page_number }}">Newer <span aria-hidden="true">&rarr;</span></a></li>
                 {% endif %}
             </ul>
-        </div>
+        </nav>
+
+ 
     {% endif %}
 
 {% endblock main %}

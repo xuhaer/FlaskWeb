@@ -14,7 +14,7 @@ class ArticlesRssFeed(Feed):
 
     # 聚合器中显示的内容条目的标题
     def item_title(self, item):
-        return '{}:{}'.format(item.category.name, item.title)
+        return '{}'.format(item.title)
 
     # 聚合器中显示的内容条目的描述
     def item_description(self, item):
