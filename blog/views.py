@@ -137,13 +137,14 @@ class ArticleDetailView(DetailView):
 
 class ArchivesView(ListView):
     model = Article
-    template_name = 'blog/index.html'
+    template_name = 'blog/archive.html'
     context_object_name = 'article_list'
 
-    def get_queryset(self):
-        year = self.kwargs.get('year')
-        month = self.kwargs.get('month')
-        return super(ArchivesView, self).get_queryset().filter(created_at__year=year,created_at__month=month)
+    # def get_queryset(self):
+    #     year = self.kwargs.get('year')
+    #     month = self.kwargs.get('month')
+    #     return super(ArchivesView, self).get_queryset().filter(created_at__year=year,created_at__month=month)
+
 # def archives(request, year, month):
 #     article_list = Article.objects.filter(created_at__year=year, created_at__month=month).order_by('-created_at')
 #     return render(request, 'blog/index.html', context={'article_list': article_list})

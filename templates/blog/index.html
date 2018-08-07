@@ -12,20 +12,24 @@
                     <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
                 </h1>
                 <div class="entry-meta">
-                    <span class="article-category">
-                        <a href="{% url 'blog:category' article.category.pk %}">{{ article.category.name }}</a></span>
-                    <span class="article-date"><a href="#"><time class="entry-date"
-                                                              datetime="{{ article.created_at }}">{{ article.created_at }}</time></a></span>
-                    <span class="article-author"><a href="#">{{ article.author }}</a></span>
-                    <span class="comments-link">
+                    <!-- <span class="article-category">
+                        <a href="{% url 'blog:category' article.category.pk %}">{{ article.category.name }}</a></span> -->
+                    <span class="article-date" href="#"><time class="entry-date"
+                                                              datetime="{{ article.created_at|date:'M d,Y' }}">{{ article.created_at|date:'M d,Y' }}</time></span>
+                    <!-- <span class="article-author"><a href="#">By:{{ article.author }}</a></span> -->
+                    <!-- <span class="comments-link">
                         <a href="{{ article.get_absolute_url }}#comment-area">{{ article.comment_set.count }} 评论</a></span>
-                    <span class="views-count"><a href="{{ article.get_absolute_url }}">{{ article.views }} 阅读</a></span>
+                    <span class="views-count"><a href="{{ article.get_absolute_url }}">{{ article.views }} 阅读</a></span> -->
                 </div>
             </header>
             <div class="entry-content clearfix">
                 <p>{{ article.digest }}...</p>
-                <div class="read-more cl-effect-14">
-                    <a href="{{ article.get_absolute_url }}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+                <!-- <div class="read-more cl-effect-14"> -->
+                <div class="read-more cl-effect-1">
+                    <!-- <a href="{{ article.get_absolute_url }}" class="more-link">more <span class="meta-nav">→</span></a> -->
+                    <a href="{{ article.get_absolute_url }}" class="more-link">more....</a>
+                    <hr/>
+
                 </div>
             </div>
         </article>

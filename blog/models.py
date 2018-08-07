@@ -22,6 +22,9 @@ class Tag(models.Model):
 
     def __repr__(self):
         return 'Tag:{}'.format(self.name)
+        
+    def __str__(self):
+        return self.name
 
 
 class Article(models.Model):
@@ -40,7 +43,7 @@ class Article(models.Model):
            ])
            # 先将 Markdown 文本渲染成 HTML 文本
            # strip_tags 去掉 HTML 文本的全部 HTML 标签
-           self.digest = strip_tags(md.convert(self.content))[:32]
+           self.digest = strip_tags(md.convert(self.content))[:256]
 
        # 调用父类的 save 方法将数据保存到数据库中
        super(Article, self).save(*args, **kwargs)
