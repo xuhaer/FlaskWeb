@@ -7,9 +7,9 @@
     
     {% for article in article_list %}
         <article class="article article-{{ article.pk }}">
-                <span class="article-date"><time class="entry-date"
+                <span class="article-date-archive"><time class="entry-date"
                     datetime="{{ article.created_at|date:'M,d Y' }}">{{ article.created_at|date:'M,d Y' }}:</time></span>
-                    <a href="{{ article.get_absolute_url }}"><u>{{ article.title }}</u></a>
+                    <a href="{{ article.get_absolute_url }}" class="article-title-link">{{ article.title }}</a>
 
         </article>
     {% empty %}

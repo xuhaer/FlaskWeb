@@ -17,14 +17,14 @@ class Category(models.Model):
         return self.name
 
 
-class Tag(models.Model):
-    name = models.CharField(max_length=20)
+# class Tag(models.Model):
+#     name = models.CharField(max_length=20)
 
-    def __repr__(self):
-        return 'Tag:{}'.format(self.name)
+#     def __repr__(self):
+#         return 'Tag:{}'.format(self.name)
         
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 
 class Article(models.Model):
@@ -54,14 +54,15 @@ class Article(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     # 但默认情况下 CharField 要求我们必须存入数据,否则就会报错。
     # 指定 blank=True 后就可以允许空值了。
-    digest = models.CharField(max_length=200, blank=True,help_text="可选项，若为空则摘要取正文前32个字符")
+    digest = models.CharField(max_length=512, blank=True,help_text="可选项，若为空则摘要取正文前256个字符")
     views = models.PositiveIntegerField(default=0)
     likes = models.PositiveIntegerField(default=0)
-    is_top = models.BooleanField(default=False)
+    # is_top = models.BooleanField(default=False)
 
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
-    tags = models.ManyToManyField(Tag, blank=True) #可以无标签
+    #tags = models.ManyToManyField(Tag, blank=True) #可以无标签
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     def __repr__(self):
         return 'Article:{}'.format(self.title)
 

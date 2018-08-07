@@ -24,6 +24,10 @@
  * 2.0 - General Elements
  */
 
+::-moz-selection{background:#C9F0DD;} 
+::selection {background:#C9F0DD;} 
+
+
 * {
     outline: none;
 }
@@ -50,9 +54,7 @@ a:hover, a:focus {
     color: #000;
 }
 
-::selection {
-    background-color: #eee;
-}
+
 
 body {
     color: #444;
@@ -94,6 +96,20 @@ img {
 .height-40px {
     margin-bottom: 40px;
 }
+
+
+.article-title-link {
+    /* display: block; */
+    margin-bottom: 25px;
+    margin-left: 25px;
+    color: #42b983;
+    word-break: break-all;
+    font-size: 1rem;
+}
+/* .col-md-12 {
+    margin-left:20%; 
+} */
+
 
 /**
  * 3.0 - Site Header
@@ -194,7 +210,7 @@ img {
 
 .cl-effect-11 a {
     padding: 10px 0;
-    color: #0972b4;
+    /* color: #0972b4; */
     text-shadow: none;
 }
 
@@ -225,6 +241,9 @@ img {
 
 .content-body {
     padding-bottom: 4em;
+    margin-left:15%;
+    margin-right:15%;
+
 }
 
 .article {
@@ -257,6 +276,19 @@ img {
     color: #7f8c8d;
     margin: 1.2em 0;
 }
+
+.article-date-archive {
+    color: #7f8c8d;
+    margin: 1.2em 0;
+    margin-left: 20%
+}
+}
+
+.article-author {
+    color: #CCFFFF;
+    margin: 1.2em 0;
+}
+
 /*.article-category::after,
 .article-date::after,
 .article-author::after,
@@ -454,63 +486,30 @@ img {
 /**
  * 7.0 - Header Search Bar
  */
+ /* <div id="search-form" class="search-form">
+ <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+     <input type="search" name='q' placeholder="搜索" required>
+     <button type="submit"><span class="ion-ios-search-strong"></span></button>
+ </form>
+</div> */
 
-#header-search-box {
-    position: absolute;
-    right: 38px;
-    top: 8px;
-}
-
-.search-form {
-    display: none;
-    width: 25%;
-    position: absolute;
-    min-width: 200px;
-    right: -6px;
-    top: 33px;
-}
-
-#search-menu span {
-    font-size: 20px;
-}
-
-#searchform {
-    position: relative;
-    border: 1px solid #ddd;
-    min-height: 42px;
-}
-
-#searchform input[type=search] {
-    width: 100%;
-    border: none;
-    position: absolute;
-    left: 0;
-    padding: 10px 30px 10px 10px;
-    z-index: 99;
-}
-
-#searchform button {
-    position: absolute;
-    right: 6px;
-    top: 4px;
-    z-index: 999;
-    background: transparent;
+ .search-form {
     border: 0;
-    padding: 0;
-}
+    padding: .5em 1em .5em 2em;
+    width: 33%;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    background: #F2F2F2;
+    border-radius: 1.0em;
+    margin: 0;
+    font-size: 24px;
+    margin-left: 33%;
+ }
 
-#searchform button span {
-    font-size: 22px;
-}
 
-#search-menu span.ion-ios-close-empty {
-    font-size: 40px;
-    line-height: 0;
-    position: relative;
-    top: -6px;
-}
 
-/**
+
+ /**
  * 8.0 - Mobile Menu
  */
 
@@ -767,6 +766,7 @@ img {
 }
 
 .comment-item .text {
+    
     padding-top: 5px;
     font-size: 16px;
 }
