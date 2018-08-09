@@ -2,13 +2,9 @@
  * Table of Contents
  *
  
- * 2.0 - General Elements
- * 3.0 - Site Header
- *   3.1 - Logo
- *   3.2 - Main Navigation
- *     3.2.1 - Main Nav CSS 3 Hover Effect
- * 4.0 - Home/Blog
- *   4.1 - Read More Button CSS 3 style
+ * 1.0 - General Elements
+ * 2.0 - Site Header
+ * 3.0 - Home/Blog
  * 5.0 - Widget
  * 6.0 - Footer
  * 7.0 - Header Search Bar
@@ -88,33 +84,30 @@ img {
 }
 
 
-
-
-
-
-
-
 /**
  * 3.0 - Site Header
  */
 
+
+.logo-link img {
+    height: 60px;
+    float: right;
+    border-radius: 100%;
+}
+
+
 #site-header {
     background-color: #FFF;
-    padding: 10px 15px;
+    padding: 10px 25px;
     margin-bottom: 30px;
-    border-bottom: 2px solid #e7e7e7;
+    text-align: center;
 }
 
 .main-nav {
-    margin-top: 11px;
-    max-width: 100%;
+    margin-top: 7px;
 }
 
  /* 导航条居中 */
- .navbar-nav {
-    float: none;
-    text-align:center;
-  }
 
 ul.nav.navbar-nav  li {
       float:none;
@@ -124,7 +117,7 @@ ul.nav.navbar-nav  li {
 
 .main-nav a {
     font-weight: 400;
-    font-size: 30px;
+    font-size: 18px;
 }
 
 .main-nav a:active,
@@ -142,15 +135,13 @@ ul.nav.navbar-nav  li {
 
 
 
-
-
 /* search-form */
 
 .searchform {
     position: relative;
-    float: right;
+    float: left;
     height: 42px;
-    width: 300px;
+    padding-top: 10px;
 }
 
 .searchform input, button {
@@ -164,7 +155,7 @@ ul.nav.navbar-nav  li {
     width: 150px;
     border-radius: 42px;
     border: 2px solid #324B4E;
-    background: #F9F0DA;
+    background: #eee;
     transition: .3s linear;
     float: right;
 }
@@ -175,7 +166,7 @@ ul.nav.navbar-nav  li {
 
 .searchform button {
     background: none;
-    top: -2px;
+    /* top: -2px; */
     right: 0;
     height: 42px;
     width: 42px;
@@ -196,7 +187,10 @@ ul.nav.navbar-nav  li {
 
 
 /**
- * 4.0 - Home/Blog.btn {
+ * 3.0 - Home/Blog
+ **/
+ 
+ .btn {
     border: none;
     outline: none;
     padding: 10px 16px;

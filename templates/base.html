@@ -25,33 +25,44 @@
 
 
 <body>
-<header id="site-header">
-    <div class="row">
-        <div class=".col-xs-12 .col-md-4">
-            <nav class="main-nav" role="navigation">
+<div class="container-fluid">
+    <header id="site-header">
+        <div class="row">
+            <div class="col-xs-6 col-sm-4">
+                <a href="/" class="logo-link"><img src=/favicon.ico></a>                    
+            </div>
+
+            <div class="col-xs-6 col-sm-4">
+                <nav class="main-nav" role="navigation">
                     <ul class="nav navbar-nav" >
-                        <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="首页">首页</a></li>
-                        <li class="cl-effect-11"><a href="{% url 'blog:archives' %}" data-hover="归档">归档</a></li>
-                        <li class="cl-effect-11"><a href="#" data-hover="关于">关于</a></li>
+                        <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="首页">INDEX</a></li>
+                        <li class="cl-effect-11"><a href="{% url 'blog:archives' %}" data-hover="归档">ARCHIVES</a></li>
+                        <li class="cl-effect-11"><a href="#" data-hover="关于">ABOUT</a></li>
                         <li class="cl-effect-11"><a href="{% url 'rss' %}" data-hover="RSS">RSS</a></li>
                     </ul>
-            </nav>
+                </nav>
+            </div>
 
-            <form class="searchform" action="{% url 'haystack_search' %}">
-                <input type="text" name='q' placeholder="搜索..." required>
-                <button type="submit"></button>
-            </form>
+            <!-- Optional: clear the XS cols if their content doesn't match in height -->
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-xs-6 col-sm-4">
+                <form class="searchform" action="{% url 'haystack_search' %}">
+                    <input type="text" name='q' placeholder="搜索..." required>
+                    <button type="submit"></button>
+                </form>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
+</div>
+
 
 <div class="content-body">
-        <div class="row">
-            <main class="col-md-12">
-                {% block main %}
-                {% endblock main %}
-            </main>
-        </div>
+    <div class="row">
+        <main class=".col-md-6 .col-md-offset-3">
+            {% block main %}
+            {% endblock main %}
+        </main>
+    </div>
     <!-- 回到顶部 -->
     <a id="back-to-top" href="#"><span>⬆︎</span> </a>
     
