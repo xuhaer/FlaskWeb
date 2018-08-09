@@ -19,6 +19,8 @@
  * 13.0 - Pagination
  */
 
+/* html {background-color: #f8f8f5;} */
+
 
 /**
  * 2.0 - General Elements
@@ -32,12 +34,7 @@
     outline: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1,h2,h3,h4,h5,h6 {
     margin-top: 0;
 }
 
@@ -51,26 +48,18 @@ a {
 
 a:hover, a:focus {
     text-decoration: none;
-    color: #000;
 }
-
-
 
 body {
     color: #444;
-    font-family: 'Lato', sans-serif;
+    font-family: Helvetica,sans-serif;
 }
 
 p {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: Helvetica,sans-serif;
     font-weight: 400;
     word-spacing: 1px;
     letter-spacing: 0.01em;
-}
-
-#single p,
-#page p {
-    margin-bottom: 25px;
 }
 
 .page-title {
@@ -89,15 +78,6 @@ img {
     max-width: 100%;
 }
 
-.img-responsive-center img {
-    margin: 0 auto;
-}
-
-.height-40px {
-    margin-bottom: 40px;
-}
-
-
 .article-title-link {
     /* display: block; */
     margin-bottom: 25px;
@@ -106,9 +86,12 @@ img {
     word-break: break-all;
     font-size: 1rem;
 }
-/* .col-md-12 {
-    margin-left:20%; 
-} */
+
+
+
+
+
+
 
 
 /**
@@ -117,72 +100,31 @@ img {
 
 #site-header {
     background-color: #FFF;
-    padding: 25px 20px;
-    margin-bottom: 40px;
-    border-bottom: 1px solid #e7e7e7;
+    padding: 10px 15px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e7e7e7;
 }
-
-.copyrights {
-    text-indent: -9999px;
-    height: 0;
-    line-height: 0;
-    font-size: 0;
-    overflow: hidden;
-}
-
-/**
- * 3.1 - Logo
- */
-
-.logo h1 a {
-    color: #000;
-}
-
-.logo h1 a:hover {
-    text-decoration: none;
-    border-bottom: none;
-}
-
-.logo h1 {
-    margin: 0;
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-}
-
-/**
- * 3.2 - Main Navigation
- */
- 
- /* 导航条居中 */
- .navbar-nav {
-    float: none;
-    text-align:center;
-  }
-  ul.nav.navbar-nav  li {
-      float:none;
-      display: inline-block;
-      margin: 0em;
-  }
-
 
 .main-nav {
     margin-top: 11px;
     max-width: 100%;
 }
 
-/* .main-nav a {
-    color: #000000 !important;
-    padding: 0 0 5px 0 !important;
-    margin-right: 30px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    font-size: 24px;
-} */
+ /* 导航条居中 */
+ .navbar-nav {
+    float: none;
+    text-align:center;
+  }
 
+ul.nav.navbar-nav  li {
+      float:none;
+      display: inline-block;
+      margin: 0em;
+}
 
 .main-nav a {
-    font-weight: 300;
-    font-size: 24px;
+    font-weight: 400;
+    font-size: 30px;
 }
 
 .main-nav a:active,
@@ -190,54 +132,81 @@ img {
 .main-nav a:hover {
     background-color: transparent !important;
     border-bottom: 0;
+    color: #42b983;
 }
 
-.navbar-toggle {
-    margin: 0;
-    border: 0;
-    padding: 0;
-    margin-right: 25px;
+.active a, .cl-effect-11:hover {
+    color: #42b983;
+
 }
 
-.navbar-toggle span {
-    font-size: 2em;
-    color: #000;
+
+
+
+
+/* search-form */
+
+.searchform {
+    position: relative;
+    float: right;
+    height: 42px;
+    width: 300px;
 }
 
-/**
- * 3.2.1 - Main Nav CSS 3 Hover Effect
- */
-
-.cl-effect-11 a {
-    padding: 10px 0;
-    /* color: #0972b4; */
-    text-shadow: none;
+.searchform input, button {
+    border: none;
+    outline: none;
 }
 
-.cl-effect-11 a::before {
+.searchform input {
+    padding-left: 13px;
+    height:42px;
+    width: 150px;
+    border-radius: 42px;
+    border: 2px solid #324B4E;
+    background: #F9F0DA;
+    transition: .3s linear;
+    float: right;
+}
+
+.searchform input:focus {
+    width: 300px;
+}
+
+.searchform button {
+    background: none;
+    top: -2px;
+    right: 0;
+    height: 42px;
+    width: 42px;
+    cursor: pointer;
     position: absolute;
-    /* top: 0;
-    left: 0; */
-    overflow: hidden;
-    padding: 0 0 5px 0 !important;
-    max-width: 0;
-    border-bottom: 1px solid #000;
-    color: #010;
-    content: attr(data-hover);
-    white-space: nowrap;
-    -webkit-transition: max-width 0.5s;
-    -moz-transition: max-width 0.5s;
-    transition: max-width 0.5s;
 }
 
-.cl-effect-11 a:hover::before,
-.cl-effect-11 a:focus::before {
-    max-width: 100%;
+.searchform button:before{
+    content: "\f002";
+    font-family: FontAwesome;
+    color: #324b4e;
 }
+
+ 
+
+
+ 
+
 
 /**
- * 4.0 - Home/Blog
- */
+ * 4.0 - Home/Blog.btn {
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Style the active class, and buttons on mouse-over */
+
 
 .content-body {
     padding-bottom: 4em;
@@ -281,7 +250,6 @@ img {
     color: #7f8c8d;
     margin: 1.2em 0;
     margin-left: 20%
-}
 }
 
 .article-author {
@@ -483,28 +451,7 @@ img {
     color: #666;
 }
 
-/**
- * 7.0 - Header Search Bar
- */
- /* <div id="search-form" class="search-form">
- <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
-     <input type="search" name='q' placeholder="搜索" required>
-     <button type="submit"><span class="ion-ios-search-strong"></span></button>
- </form>
-</div> */
 
- .search-form {
-    border: 0;
-    padding: .5em 1em .5em 2em;
-    width: 33%;
-    box-sizing: border-box;
-    -webkit-appearance: none;
-    background: #F2F2F2;
-    border-radius: 1.0em;
-    margin: 0;
-    font-size: 24px;
-    margin-left: 33%;
- }
 
 
 

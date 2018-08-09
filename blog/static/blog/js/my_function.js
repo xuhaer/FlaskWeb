@@ -12,3 +12,16 @@ $(function(){
 			$("html,body").animate({scrollTop:"0px"},200);
 	});
 });
+
+
+//顶部导航栏动态active属性--> hover
+$(function (){
+    $('.navbar-nav ').find('a').each(function () {
+        // if (this.href == document.location.href || document.location.href.search(this.href) >= 0) {
+		if (this.href == document.location.href) {
+		console.log(document.location.href,(this.href))
+			$(this).parent().siblings('li').removeClass('active');
+            $(this).parent().addClass('active'); 
+        }
+    });
+});
