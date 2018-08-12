@@ -43,7 +43,7 @@ class Article(models.Model):
            ])
            # 先将 Markdown 文本渲染成 HTML 文本
            # strip_tags 去掉 HTML 文本的全部 HTML 标签
-           self.digest = strip_tags(md.convert(self.content))[:256]
+           self.digest = strip_tags(md.convert(self.content))[:128]
 
        # 调用父类的 save 方法将数据保存到数据库中
        super(Article, self).save(*args, **kwargs)
@@ -59,7 +59,7 @@ class Article(models.Model):
     likes = models.PositiveIntegerField(default=0)
     # is_top = models.BooleanField(default=False)
 
-    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey(Category, related_name='articles', null=True, on_delete=models.SET_NULL)
     #tags = models.ManyToManyField(Tag, blank=True) #可以无标签
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     

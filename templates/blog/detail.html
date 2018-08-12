@@ -1,22 +1,20 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <article class="article article-{{ article.pk }}">
-        <header class="entry-header">
-            <h1 class="entry-title">{{ article.title }}</h1>
-            <div class="entry-meta">
-                    <span class="article-date" href="#"><time class="entry-date"
-                        datetime="{{ article.created_at}}">{{ article.created_at|date:'H:i M d,Y' }}</time></span>
-                <span class="article-author"><a href="#">By:{{ article.author }}</a></span>
-                <!-- <span class="comments-link">
-                    <a href="{{ article.get_absolute_url }}#comment-area">{{ article.comment_set.count }} 评论</a></span>
-                <span class="views-count"><a href="#">{{ article.views }} 阅读</a></span> -->
-            </div>
-        </header>
-        <div class="entry-content clearfix">
-            {{ article.content|safe }}
+    <header class="article-header">
+        <h1 class="article-title">{{ article.title }}</h1>
+        <div class="article-meta">
+                <span class="article-date" href="#"><time class="article-date"
+                    datetime="{{ article.created_at}}">{{ article.created_at|date:'H:i M d,Y' }}</time></span>
+            <span class="article-author"><a href="#">By:{{ article.author }}</a></span>
+            <!-- <span class="comments-link">
+                <a href="{{ article.get_absolute_url }}#comment-area">{{ article.comment_set.count }} 评论</a></span>
+            <span class="views-count"><a href="#">{{ article.views }} 阅读</a></span> -->
         </div>
-    </article>
+    </header>
+    <div class="article-content clearfix">
+        {{ article.content|safe }}
+    </div>
 
     <section class="comment-area" id="comment-area">
         <br/><br/><br/><br/><hr/>
@@ -45,7 +43,7 @@
                     {{ form.text.errors }}
                     <button type="submit" class="btn btn-primary">发表</button>
                 </div>
-            </div>    <!-- row -->
+            </div>
         </form>
         <div class="comment-list-panel">
             <h3>评论列表，共 <span>{{ article.comment_set.count }}</span> 条评论</h3>
@@ -62,12 +60,3 @@
         </div>
     </section>
 {% endblock main %}
-
-{% block toc %}
-    <div class="widget widget-content">
-        {% if article.toc|length > 35 %} 
-            <h3 class="widget-title">文章目录</h3>
-            {{ article.toc|safe }}
-        {% endif %}
-    </div>
-{% endblock toc %}

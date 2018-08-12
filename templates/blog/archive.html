@@ -6,12 +6,10 @@
     {% endif %}
     
     {% for article in article_list %}
-        <article class="article article-{{ article.pk }}">
-                <span class="article-date-archive"><time class="entry-date"
-                    datetime="{{ article.created_at|date:'M,d Y' }}">{{ article.created_at|date:'M,d Y' }}:</time></span>
-                    <a href="{{ article.get_absolute_url }}" class="article-title-link">{{ article.title }}</a>
-
-        </article>
+        <span class="article-archive"><time class="article-date">
+            {{ article.created_at|date:'M,d Y' }}:</time>
+            <a class="article-title-link" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        </span>
     {% empty %}
         <div class="no-article">暂时还没有发布的文章！</div>
     {% endfor %}
