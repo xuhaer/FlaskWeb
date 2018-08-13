@@ -9,6 +9,7 @@ import shutil
 import threading
 import warnings
 
+import jieba
 from jieba.analyse import ChineseAnalyzer
 
 from django.conf import settings
@@ -26,6 +27,7 @@ from haystack.utils import log as logging
 from haystack.utils import get_identifier, get_model_ct
 from haystack.utils.app_loading import haystack_get_model
 
+jieba.load_userdict('/Users/har/Desktop/mydict.txt')
 try:
     import whoosh
 except ImportError:

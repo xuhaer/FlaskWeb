@@ -18,14 +18,21 @@
                 <a href="{{ article.get_absolute_url }}#comment-area">{{ article.comment_set.count }} 评论</a></span>
             <span class="views-count"><a href="{{ article.get_absolute_url }}">{{ article.views }} 阅读</a></span> -->
         </div>
-        <div class="article-content clearfix">
-            <a href="{{ article.get_absolute_url }}" class="more-link">
-                <p>{{ article.digest }}....</p></a>
-            </br>
-            <hr/>
-            <!-- <p>{{ article.digest }}...</p> -->
+    <!-- </p> -->
+                <!-- <p>{{ article.digest }}...</p> -->
             <!-- <div class="read-more cl-effect-14"> -->
+        <div class="article-digest clearfix">
+            {% if article.digest_img %}
+                <img alt="cute" src={{article.digest_img}}>
+            {% endif %}
+            <div class="digest-body">
+                <a href="{{ article.get_absolute_url }}" class="more-link">
+                    {{ article.digest }}</a>
+                <!-- <div type="button" class="digest-more">more...</div> -->
+            </div>
         </div>
+        </br>
+        <hr/>
     {% empty %}
         <div class="no-article">暂时还没有发布的文章！</div>
     {% endfor %}

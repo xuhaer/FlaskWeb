@@ -11,13 +11,17 @@ from comments.forms import CommentForm
 
 # Create your views here.
 
+# 修改文章后digest不会自动更改，可这样处理:
+for a in Article.objects.all():
+    a.save()
+
 class IndexView(ListView):
     model = Article
     template_name = 'blog/index.html'
     context_object_name = 'article_list'
     paginate_by = 5
-
-
+  
+            
 class ArticleDetailView(DetailView):
     # 这些属性的含义和 ListView 是一样的
     model = Article
@@ -44,7 +48,7 @@ class ArticleDetailView(DetailView):
             TocExtension(slugify=slugify),
         ])
         article.content = md.convert(article.content)
-        article.toc = md.toc
+        # article.toc = md.toc
         return article
 
     def get_context_data(self, **kwargs): 
@@ -99,14 +103,14 @@ class ArchivesView(ListView):
 #     return render(request, 'blog/index.html', context={'article_list': article_list})
 
 
-def search(request):
-    q = request.GET.get('q')
-    error_msg = ''
+# def search(request):
+#     q = request.GET.get('q')
+#     error_msg = ''
 
-    if not q:
-        error_msg = "请输入关键词"
-        return render(request, 'blog/index.html', {'error_msg': error_msg})
+#     if not q:
+#         error_msg = "请输入关键词"
+#         return render(request, 'blog/index.html', {'error_msg': error_msg})
 
-    article_list = Article.objects.filter(Q(title__icontains=q) | Q(content__icontains=q))
-    return render(request, 'blog/index.html', {'error_msg': error_msg,
-                                               'article_list': article_list})
+#     article_list = Article.objects.filter(Q(title__icontains=q) | Q(content__icontains=q))
+#     return render(request, 'blog/index.html', {'error_msg': error_msg,
+#                                                'article_list': article_list})

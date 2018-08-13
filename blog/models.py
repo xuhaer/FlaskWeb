@@ -1,3 +1,4 @@
+import re
 import markdown
 
 from django.db import models
@@ -36,17 +37,21 @@ class Article(models.Model):
         self.save(update_fields=['views'])
 
     def save(self, *args, **kwargs):
-       if not self.digest:
-           md = markdown.Markdown(extensions=[
-               'markdown.extensions.extra',
-               'markdown.extensions.codehilite',
-           ])
-           # 先将 Markdown 文本渲染成 HTML 文本
-           # strip_tags 去掉 HTML 文本的全部 HTML 标签
-           self.digest = strip_tags(md.convert(self.content))[:128]
+        if not self.digest:
+            md = markdown.Markdown(extensions=[
+                'markdown.extensions.extra',
+                'markdown.extensions.codehilite',
+            ])
+            # self.digest = self.content[:128]
+            # 先将 Markdown 文本渲染成 HTML 文本
+            # strip_tags 去掉 HTML 文本的全部 HTML 标签
+            self.digest = strip_tags(md.convert(self.content))[:128]
+            digest_img = re.findall(r'!\[.*?\]\((.*?)\)',self.content, re.DOTALL)
+            if digest_img:self.digest_img = digest_img[0]
+
 
        # 调用父类的 save 方法将数据保存到数据库中
-       super(Article, self).save(*args, **kwargs)
+        super(Article, self).save(*args, **kwargs)
        
     title = models.CharField(max_length=64)
     content = models.TextField()
@@ -54,11 +59,11 @@ class Article(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     # 但默认情况下 CharField 要求我们必须存入数据,否则就会报错。
     # 指定 blank=True 后就可以允许空值了。
-    digest = models.CharField(max_length=512, blank=True,help_text="可选项，若为空则摘要取正文前256个字符")
+    digest = models.CharField(max_length=512, blank=True, help_text="可选项，若为空则摘要取正文前128个字符")
     views = models.PositiveIntegerField(default=0)
     likes = models.PositiveIntegerField(default=0)
     # is_top = models.BooleanField(default=False)
-
+    digest_img = models.CharField(max_length=256,default='')
     category = models.ForeignKey(Category, related_name='articles', null=True, on_delete=models.SET_NULL)
     #tags = models.ManyToManyField(Tag, blank=True) #可以无标签
     author = models.ForeignKey(User, on_delete=models.CASCADE)
