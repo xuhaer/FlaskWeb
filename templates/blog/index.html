@@ -14,22 +14,28 @@
                 datetime="{{ article.created_at|date:'M d,Y' }}">
                 {{ article.created_at|date:'M d,Y' }}</time>
             </span>
-            <!-- <span class="comments-link">
-                <a href="{{ article.get_absolute_url }}#comment-area">{{ article.comment_set.count }} 评论</a></span>
-            <span class="views-count"><a href="{{ article.get_absolute_url }}">{{ article.views }} 阅读</a></span> -->
         </div>
-    <!-- </p> -->
-                <!-- <p>{{ article.digest }}...</p> -->
-            <!-- <div class="read-more cl-effect-14"> -->
         <div class="article-digest clearfix">
             {% if article.digest_img %}
+                <div class="col-md-3 digest-img">
+
                 <img alt="cute" src={{article.digest_img}}>
+                </div>
+                <div class="col-md-6 digest-body">
+                        <a href="{{ article.get_absolute_url }}" class="more-link">
+                            {{ article.digest }}
+                            <span class="digest-more">阅读全文</span>
+                        </a>
+                </div>
+            {% else %}
+                <div class="only-digest-body">
+                        <a href="{{ article.get_absolute_url }}" class="more-link">
+                            {{ article.digest }}
+                            <span class="digest-more">阅读全文</span>
+                        </a>
+                </div> 
             {% endif %}
-            <div class="digest-body">
-                <a href="{{ article.get_absolute_url }}" class="more-link">
-                    {{ article.digest }}</a>
-                <!-- <div type="button" class="digest-more">more...</div> -->
-            </div>
+
         </div>
         </br>
         <hr/>

@@ -282,21 +282,38 @@ p {
 /* 
 4.0 Index Page 
 */
-.article-digest a {
-    /* text-indent: 0; */
-    margin-left: 10px;
 
+
+.digest-img {
+    height: 110px;
+    width: 220px;
+    margin-left: 10%;
+    margin-top: 20px;
 }
-.article-digest img {
-    float: left;
-    height: 90px;
-    width: 160px;
+
+.digest-img img {
+    height: 110px;
+    width: 190px;
 }
+
+
+
+@media screen and (max-width: 991px) {
+    .digest-img {
+        height: 110px;
+        width: 220px;
+        margin: auto;
+    }
+}
+
+.only-digest-body {
+    padding: 0 13%;
+}
+
 .digest-more {
-    text-align: center;
-    padding: 0;
     margin-left: 10px;
     color: #175199;
+    border-bottom: solid 1px;
 }
 
 
@@ -311,9 +328,10 @@ p {
     padding: 2px;
 }
 
-.article-archive a:hover{
+.article-archive a {
     color: #42b983;
 }
+
 
 /**
  * 6.0 - Contact Page
