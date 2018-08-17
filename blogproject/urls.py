@@ -27,4 +27,5 @@ urlpatterns = [
     path('rss/',ArticlesRssFeed(),name='rss'),
     path('search/', include('haystack.urls')),
     path('favicon.ico', RedirectView.as_view(url='static/favicon.ico')),
+    path('captcha/', include('captcha.urls')),
 ]

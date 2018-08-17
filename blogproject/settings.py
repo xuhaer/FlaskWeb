@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blog',
     'comments',
     'pagedown',
+    'captcha',
     
 ]
 
@@ -134,3 +135,9 @@ HAYSTACK_CONNECTIONS = {
 }
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+
+#simple-captcha
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+# CAPTCHA_BACKGROUND_COLOR = 'red'
+# CAPTCHA_FOREGROUND_COLOR = 'yellow'

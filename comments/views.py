@@ -2,6 +2,8 @@
 # Create your views here.
 
 from django.shortcuts import render, get_object_or_404, redirect
+from captcha.models import CaptchaStore
+from django.http import JsonResponse
 
 from .models import Comment
 from .forms import CommentForm
@@ -42,3 +44,18 @@ def article_comment(request, article_pk):
             return render(request, 'blog/detail.html', context=context)
             # 不是 post 请求，说明用户没有提交数据，重定向到文章详情页。
     return redirect(article)
+
+
+def ajax_val(request):
+    if  request.is_ajax():
+        cs = CaptchaStore.objects.filter(response=request.GET['response'],
+                                     hashkey=request.GET['hashkey'])
+        if cs:
+            json_data={'status':1}
+        else:
+            json_data = {'status':0}
+        return JsonResponse(json_data)
+    else:
+        # raise Http404
+        json_data = {'status':0}
+        return JsonResponse(json_data)
