@@ -20,7 +20,7 @@ class CommentForm(forms.ModelForm):
             'email': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': '(可选)',
-                'required':False
+                'required':False,
             }),
             'text': forms.Textarea(attrs={
                 'class': 'form-control',
