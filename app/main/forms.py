@@ -35,7 +35,7 @@ class EditProfileAdminForm(FlaskForm):
     submit = SubmitField('Submit')
 
     def __init__(self, user, *args, **kwargs):
-        super(EditProfileAdminForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.role.choices = [(role.id, role.name)
                              for role in Role.query.order_by(Role.name).all()]
         self.user = user
@@ -52,8 +52,9 @@ class EditProfileAdminForm(FlaskForm):
 
 
 class PostForm(FlaskForm):
-    body = PageDownField("What's on your mind?", validators=[DataRequired()])
+    body = PageDownField("What's on your mind?", validators=[DataRequired()], render_kw={'rows': 15, 'placeholder': '''To produce a code block in Markdown, simply indent every line of the block by at least 4 spaces or 1 tab.'''})
     submit = SubmitField('Submit')
+
 
 class CommentForm(FlaskForm):
     body = StringField('Enter your comment', validators=[DataRequired()])
