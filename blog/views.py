@@ -1,27 +1,35 @@
+import random
+import logging
 import markdown
+
 from markdown.extensions.toc import TocExtension
-from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.utils.text import slugify
-from django.db.models import Q
+from django_redis import get_redis_connection
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
-from .models import Article, Category#, Tag
 from comments.forms import CommentForm
+from .models import Article
 
 
+logger = logging.getLogger(__name__)
+r = get_redis_connection("default")
 # Create your views here.
 
 # 修改文章后digest不会自动更改，可这样处理:
 # for a in Article.objects.all():
 #     a.save()
 
+@method_decorator(cache_page(24 * 3600 + random.randint(0, 100)), name='dispatch')
 class IndexView(ListView):
     model = Article
     template_name = 'blog/index.html'
     context_object_name = 'article_list'
     paginate_by = 5
-  
-            
+
+
+@method_decorator(cache_page(24 * 3600 + random.randint(0, 100)), name='dispatch')
 class ArticleDetailView(DetailView):
     # 这些属性的含义和 ListView 是一样的
     model = Article
@@ -54,6 +62,7 @@ class ArticleDetailView(DetailView):
         return context
 
 
+@method_decorator(cache_page(24 * 3600 + random.randint(0, 100)), name='dispatch')
 class ArchivesView(ListView):
     model = Article
     template_name = 'blog/archive.html'

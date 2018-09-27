@@ -141,3 +141,17 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 # CAPTCHA_BACKGROUND_COLOR = 'red'
 # CAPTCHA_FOREGROUND_COLOR = 'yellow'
+
+CACHES = {
+    'default':{
+        'BACKEND': 'django_redis.cache.RedisCache',
+        # 奇怪! 指定一个具体的db(如:'127.0.0.1:6379/0)则会redis.exceptions.ResponseError: DB index is out of range
+        'LOCATION': '127.0.0.1:6379',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            # 'PASSWORD': 'mysecret',
+            "SOCKET_CONNECT_TIMEOUT": 5,
+        }
+    }
+}
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
