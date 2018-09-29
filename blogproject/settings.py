@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'comments',
     'pagedown',
     'captcha',
-    
 ]
 
 MIDDLEWARE = [
