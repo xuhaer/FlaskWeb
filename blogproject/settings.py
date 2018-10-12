@@ -150,6 +150,8 @@ CACHES = {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
             # 'PASSWORD': 'mysecret',
             "SOCKET_CONNECT_TIMEOUT": 5,
+            # 当连接不上redis时忽略错误, 即不启用缓存
+            "IGNORE_EXCEPTIONS": True,
         }
     }
 }
