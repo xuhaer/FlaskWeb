@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'p6avn(_9caxmp%af=c(*(pulj!=4$18!0mwdxps%+%2^g5#_5e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'comments',
     'pagedown',
     'captcha',
-    
 ]
 
 MIDDLEWARE = [
@@ -141,3 +140,19 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 # CAPTCHA_BACKGROUND_COLOR = 'red'
 # CAPTCHA_FOREGROUND_COLOR = 'yellow'
+
+CACHES = {
+    'default':{
+        'BACKEND': 'django_redis.cache.RedisCache',
+        # 奇怪! 指定一个具体的db(如:'127.0.0.1:6379/0)则会redis.exceptions.ResponseError: DB index is out of range
+        'LOCATION': '127.0.0.1:6379',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            # 'PASSWORD': os.environ['REDIS_PASSWORD'],
+            "SOCKET_CONNECT_TIMEOUT": 5,
+            # 当连接不上redis时忽略错误, 即不启用缓存
+            "IGNORE_EXCEPTIONS": True,
+        }
+    }
+}
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'

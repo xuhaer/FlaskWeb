@@ -5,3 +5,5 @@ jieba==0.39
 Markdown==2.6.11
 Whoosh==2.7.4
 django-simple-captcha==0.5.9
+requests==2.19.1
+django-redis==4.9.0
