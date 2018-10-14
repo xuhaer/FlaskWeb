@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'p6avn(_9caxmp%af=c(*(pulj!=4$18!0mwdxps%+%2^g5#_5e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -148,7 +148,7 @@ CACHES = {
         'LOCATION': '127.0.0.1:6379',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            # 'PASSWORD': os.environ['REDIS_PASSWORD'],
+            'PASSWORD': os.environ.get('REDIS_PASSWORD'),
             "SOCKET_CONNECT_TIMEOUT": 5,
             # 当连接不上redis时忽略错误, 即不启用缓存
             "IGNORE_EXCEPTIONS": True,
