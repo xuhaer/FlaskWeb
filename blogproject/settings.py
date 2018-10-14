@@ -148,7 +148,7 @@ CACHES = {
         'LOCATION': '127.0.0.1:6379',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            # 'PASSWORD': os.environ['REDIS_PASSWORD'],
+            'PASSWORD': os.environ.get('REDIS_PASSWORD'),
             "SOCKET_CONNECT_TIMEOUT": 5,
             # 当连接不上redis时忽略错误, 即不启用缓存
             "IGNORE_EXCEPTIONS": True,

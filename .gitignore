@@ -104,3 +104,5 @@ venv.bak/
 .mypy_cache/
 .DS_Store
 whoosh_index/
+static/
+log/
