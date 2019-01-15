@@ -1,4 +1,4 @@
-Django==2.0.8
+django>=2.0.10
 django-haystack==2.8.1
 django-pagedown==1.0.5
 jieba==0.39
