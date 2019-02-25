@@ -1,0 +1,10 @@
+django>=2.0.10
+django-haystack==2.8.1
+django-pagedown==1.0.5
+jieba==0.39
+Markdown==2.6.11
+Whoosh==2.7.4
+django-simple-captcha==0.5.9
+requests>=2.20.0
+django-redis==4.9.0
+fabric==2.4.0

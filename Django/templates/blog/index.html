@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    {% if error_msg %}
+        <p>{{ error_msg }}</p>
+    {% endif %}
+    
+    {% for article in article_list %}
+        <h1 class="article-title">
+            <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        </h1>
+        <div class="article-meta">
+            <span class="article-date" href="#"><time class="entry-date"
+                datetime="{{ article.created_at|date:'M d,Y' }}">
+                {{ article.created_at|date:'M d,Y' }}</time>
+            </span>
+        </div>
+        <div class="article-digest clearfix">
+            {% if article.digest_img %}
+                <div class="col-md-3 digest-img">
+
+                <img alt="cute" src={{article.digest_img}}>
+                </div>
+                <div class="col-md-6 digest-body">
+                        <a href="{{ article.get_absolute_url }}" class="more-link">
+                            {{ article.digest }}
+                            <span class="digest-more">阅读全文</span>
+                        </a>
+                </div>
+            {% else %}
+                <div class="only-digest-body">
+                        <a href="{{ article.get_absolute_url }}" class="more-link">
+                            {{ article.digest }}
+                            <span class="digest-more">阅读全文</span>
+                        </a>
+                </div> 
+            {% endif %}
+
+        </div>
+        </br>
+        <hr/>
+    {% empty %}
+        <div class="no-article">暂时还没有发布的文章！</div>
+    {% endfor %}
+         
+    
+    {% if is_paginated %}
+        <nav aria-label="pagination">
+            <ul class="pager">
+                {% if page_obj.has_previous %}
+                    <li class="previous"><a href="?page={{ page_obj.previous_page_number }}">
+                        <span aria-hidden="true">&larr;</span>Previous Page</a></li>
+                {% endif %}
+                {% if page_obj.has_next %}
+                    <li class="next"><a href="?page={{ page_obj.next_page_number }}">
+                        <span aria-hidden="true">&rarr;</span>Next Page</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+ 
+    {% endif %}
+
+{% endblock main %}

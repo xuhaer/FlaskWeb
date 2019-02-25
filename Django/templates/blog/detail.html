@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <header class="article-header">
+        <h1 class="article-title">{{ article.title }}</h1>
+        <div class="article-meta">
+                <span class="article-date" href="#"><time class="article-date"
+                    datetime="{{ article.created_at}}">{{ article.created_at|date:'H:i M d,Y' }}</time></span>
+            <span class="article-author"><a href="#">By:{{ article.author }}</a></span>
+            <!-- <span class="comments-link">
+                <a href="{{ article.get_absolute_url }}#comment-area">{{ article.comment_set.count }} 评论</a></span>
+            <span class="views-count"><a href="#">{{ article.views }} 阅读</a></span> -->
+        </div>
+    </header>
+    <div class="article-content clearfix">
+        {{ article.content|safe }}
+    </div>
+
+    <section class="comment-area" id="comment-area">
+        <br/><br/><br/><br/><hr/>
+        <h3>发表评论</h3>
+        <form action="{% url 'comments:article_comment' article.pk %}" method="post" class="comment-form">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="{{ form.name.id_for_label }}">名字：</label>
+                    {{ form.name }}
+                    {{ form.name.errors }}
+                </div>
+                <div class="col-md-4">
+                    <label for="{{ form.email.id_for_label }}">邮箱：</label>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+                <div class="col-md-12">
+                    <label for="{{ form.text.id_for_label }}">评论：</label>
+                    {{ form.text }}
+                    {{ form.text.errors }}
+                    <span class="comment-captcha">
+                        <label for="{{ form.url.id_for_label }}">验证码:</label>
+                        {{ form.captcha }}
+                        {{ form.captcha.errors }}
+                    </span>
+                    <div class="submit-button">
+                        <button type="submit" class="btn btn-primary">发表</button>
+                    </div>
+                </div>
+
+    
+
+            </div>
+        </form>
+        <div class="comment-list-panel">
+            <h3>评论列表，共 <span>{{ article.comment_set.count }}</span> 条评论</h3>
+            <ul class="comment-list list-unstyled">
+                {% for comment in comment_list %}
+                    <li class="comment-item">
+                        <time class="submit-date">{{ comment.created_at|date:'H:i M d,Y' }}</time>
+                        <div><strong>{{ comment.name }}: </strong><span class="text">{{ comment.text }}</span></div>
+                    </li>
+                {% empty %}
+                    暂无评论
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    <script>
+        $(function(){
+    
+            $('.captcha').click(function(){
+            console.log('click');
+            $.getJSON("/captcha/refresh/",
+                    function(result){
+                $('.captcha').attr('src', result['image_url']);
+                $('#id_captcha_0').val(result['key'])
+            });});
+    
+        $('#id_captcha_1').blur(function(){
+      // #id_captcha_1為輸入框的id，當該輸入框失去焦點是觸發函數
+            json_data={
+                'response':$('#id_captcha_1').val(), // 獲取輸入框和隱藏字段id_captcha_0的數值
+                'hashkey':$('#id_captcha_0').val()
+            }
+            $.getJSON('/ajax_val', json_data, function(data){
+     //ajax發送
+                $('#captcha_status').remove()
+                if(data['status']){ //status返回1為驗證碼正確， status返回0為驗證碼錯誤， 在輸入框的後面寫入提示信息
+                    $('#id_captcha_1').after('<span id="captcha_status" ></span>')
+                }else{
+                     $('#id_captcha_1').after('<span id="captcha_status" >Invalid CAPTCHA!</span>')
+                }
+            });
+        });
+        })
+        </script>
+
+{% endblock main %}

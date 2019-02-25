@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    {% if error_msg %}
+        <p>{{ error_msg }}</p>
+    {% endif %}
+    
+    {% for article in article_list %}
+        <span class="article-archive"><time class="article-date">
+            {{ article.created_at|date:'M,d Y' }}:</time>
+            <a class="article-title-link" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        </span>
+    {% empty %}
+        <div class="no-article">暂时还没有发布的文章！</div>
+    {% endfor %}
+         
+  
+{% endblock main %}

@@ -1,0 +1,71 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        span.highlighted {
+            color: red;
+        }
+    </style>
+    <link rel="shortcut icon" href="{%static 'favicon.ico'  %}" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'blog/css/pace.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/highlights/default.css' %}">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- js -->
+    <script src="{% static 'blog/js/pace.min.js' %}"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <script src="{% static 'blog/js/modernizr.custom.js' %}"></script>
+    <script src="{% static 'blog/js/my_function.js' %}"></script>
+</head>
+
+
+<body>
+<div class="container">
+    <header id="site-header">
+        <div class="row">                    
+            <div class="col-xs-12 col-sm-1 col-sm-push-1 col-md-2 col-md-push-0">
+                <a class="logo-link" href="/" ><img src=/favicon.ico></a>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-sm-push-1 col-md-7 col-md-push-0">
+                <ul class="main-nav">
+                    <li class="nav-link"><a href="{% url 'blog:index' %}" data-hover="首页">INDEX</a></li>
+                    <li class="nav-link"><a href="{% url 'blog:archives' %}" data-hover="归档">ARCHIVES</a></li>
+                    <li class="nav-link"><a href="#" data-hover="关于">ABOUT</a></li>
+                    <li class="nav-link"><a href="{% url 'rss' %}" data-hover="RSS">RSS</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 col-md-push-0">
+                <form class="searchform" action="{% url 'haystack_search' %}">
+                        <input type="text" name='q' placeholder="搜索..." required>
+                        <button type="submit"></button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="content-body">
+        <div class="row">
+                {% block main %}
+                {% endblock main %}
+        </div>
+        <!-- 回到顶部 -->
+        <a id="back-to-top" href="#"><span>⬆︎</span> </a>
+        
+    </div> 
+</div>
+
+<script src="{% static 'blog/js/script.js' %}"></script>
+
+</body>
+</html>
