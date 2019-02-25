@@ -1,13 +1,15 @@
+import hashlib
+from datetime import datetime
+
+import bleach
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask import current_app, request, url_for
+from flask import current_app, url_for
 from flask_login import UserMixin, AnonymousUserMixin
-from . import db, login_manager
-from datetime import datetime
-import hashlib
 from markdown import markdown
-import bleach
 from app.exceptions import ValidationError
+
+from . import db, login_manager
 
 
 class Permission:
@@ -144,7 +146,7 @@ class User(UserMixin, db.Model):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = s.loads(token.encode('utf-8'))
-        except:
+        except ValueError:
             return False
         if data.get('confirm') != self.id:
             return False
@@ -161,7 +163,7 @@ class User(UserMixin, db.Model):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = s.loads(token.encode('utf-8'))
-        except:
+        except ValueError:
             return False
         user = User.query.get(data.get('reset'))
         if user is None:
@@ -179,7 +181,7 @@ class User(UserMixin, db.Model):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = s.loads(token.encode('utf-8'))
-        except:
+        except ValueError:
             return False
         if data.get('change_email') != self.id:
             return False
@@ -211,7 +213,7 @@ class User(UserMixin, db.Model):
         hash = hashlib.md5(self.email.lower().encode('utf-8')).hexdigest()
         return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
             url=url, hash=hash, size=size, default=default, rating=rating)
-        
+
     def follow(self, user):
         if not self.is_following(user):
             f = Follow(follower=self, followed=user)
@@ -284,7 +286,7 @@ class User(UserMixin, db.Model):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = s.loads(token)
-        except:
+        except ValueError:
             return None
         return User.query.get(data['id'])
 
